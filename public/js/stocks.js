@@ -5,6 +5,13 @@ init();
 async function init() {
     try {
         const stockSymbol = localStorage.getItem("stockSymbol");
+        const card = document.getElementById("stocksCard");
+        if (!stockSymbol) {
+            // nothing to show, hide the card
+            if (card) card.style.display = "none";
+            return;
+        }
+        if (card) card.style.display = "";
         
         console.log(`Fetching stock data for symbol: ${stockSymbol}`);
         
