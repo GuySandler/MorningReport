@@ -3,7 +3,7 @@ async function initialize() {
         const newsData = await loadNews();
         const prompt = `Summarize the following news articles\n\n${JSON.stringify(newsData, null, 2)}`;
         // console.log('Prompt for AI:', prompt);
-        const aiResponse = await askAI(prompt, "You are a helpful assistant that summarizes news articles into a concise, engaging summary.", 1);
+        const aiResponse = await askAI(prompt, "You are a helpful assistant that summarizes news articles into a concise, engaging, bullet point summary.", 1);
         // console.log('AI Response:', aiResponse);
 
         await displayNews(aiResponse);
