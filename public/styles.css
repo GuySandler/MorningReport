@@ -188,6 +188,19 @@ body {
     margin-bottom: 1.5rem;
 }
 
+/* Palette overrides */
+body.cool {
+    background: linear-gradient(135deg, #4a5bb8 0%, #5a428a 100%);
+}
+body.cool .header { background: #7176D5; }
+body.cool .card-header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); }
+
+body.warm {
+    background: linear-gradient(135deg, #bb4a5b 0%, #8a425a 100%);
+}
+body.warm .header { background: #b55b43; }
+body.warm .card-header { background: linear-gradient(135deg, #a8322b 0%, #d55 100%); }
+
 .traffic-stat {
     background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
     border-radius: 16px;
@@ -282,7 +295,7 @@ body {
     }
 }
 
-/* AI Summary Styles */
+/* AI Summary Styles (default to cool) */
 .ai-summary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -293,6 +306,9 @@ body {
     overflow: hidden;
 }
 
+body.warm .ai-summary {
+    background: linear-gradient(135deg, #e35d5b 0%, #d44a3c 100%);
+}
 .ai-summary::before {
     content: '';
     position: absolute;

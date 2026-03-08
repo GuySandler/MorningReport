@@ -28,4 +28,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("commuteStart").value = localStorage.getItem("commuteStart") || "";
     document.getElementById("commuteEnd").value = localStorage.getItem("commuteEnd") || "";
     document.getElementById("stockSymbol").value = localStorage.getItem("stockSymbol") || "";
+    const paletteSelector = document.getElementById("colorPalette");
+    const savedPalette = localStorage.getItem("colorPalette") || "cool";
+    if (paletteSelector) {
+        paletteSelector.value = savedPalette;
+        applyPalette(savedPalette);
+        paletteSelector.addEventListener("change", function() {
+            localStorage.setItem("colorPalette", this.value);
+            applyPalette(this.value);
+        });
+    }
 });
+
+function applyPalette(palette) {
+    document.body.classList.remove("cool", "warm");
+    if (palette) document.body.classList.add(palette);
+}
