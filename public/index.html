@@ -3,82 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MorningReport</title>
+    <title>Morning Report</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Samsung+One:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
-  />
-    <button onclick="window.location.href='settings.html'">Settings</button>
-    <h1>Morning Report</h1>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="app-title">
+                        <i class="fas fa-sun"></i>
+                        Morning Report
+                    </h1>
+                    <div id="quoteOfTheDay" class="header-quote">Loading inspiration...</div>
+                </div>
+                <button class="settings-btn" onclick="window.location.href='settings.html'">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
 
-    <div id="weather">
-        <div id="AIWeather">Weather Summary Loading...</div>
-        <div id="temperature"></div>
-        <div id="apparent_temp"></div>
-        <div id="precipitation"></div>
-        <div id="humidity"></div>
-        <div id="cloud_cover"></div>
-        <div id="visibility"></div>
-        <div id="wind_speed"></div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Weather Card -->
+            <div class="card weather-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-cloud-sun"></i> Weather</h2>
+                </div>
+                <div class="card-content">
+                    <div id="AIWeather" class="ai-summary">Weather Summary Loading...</div>
+                    <div class="weather-grid">
+                        <div class="weather-item">
+                            <i class="fas fa-thermometer-half"></i>
+                            <div id="temperature"></div>
+                        </div>
+                        <div class="weather-item">
+                            <i class="fas fa-eye"></i>
+                            <div id="apparent_temp"></div>
+                        </div>
+                        <div class="weather-item">
+                            <i class="fas fa-tint"></i>
+                            <div id="precipitation"></div>
+                        </div>
+                        <div class="weather-item">
+                            <i class="fas fa-water"></i>
+                            <div id="humidity"></div>
+                        </div>
+                        <div class="weather-item">
+                            <i class="fas fa-cloud"></i>
+                            <div id="cloud_cover"></div>
+                        </div>
+                        <div class="weather-item">
+                            <i class="fas fa-wind"></i>
+                            <div id="wind_speed"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Traffic Card -->
+            <div id="trafficCard" class="card traffic-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-route"></i> Traffic</h2>
+                </div>
+                <div class="card-content">
+                    <div class="traffic-info">
+                        <div class="traffic-stat">
+                            <i class="fas fa-clock"></i>
+                            <div id="trafficTime"></div>
+                        </div>
+                        <div class="traffic-stat">
+                            <i class="fas fa-road"></i>
+                            <div id="trafficDistance"></div>
+                        </div>
+                    </div>
+                    <div id="map" class="map-container"></div>
+                </div>
+            </div>
+
+            <!-- News Card -->
+            <div class="card news-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-newspaper"></i> Latest News</h2>
+                </div>
+                <div class="card-content">
+                    <div id="newsContainer">
+                        <div class="loading-text">Loading latest news...</div>
+                    </div>
+                    <div id="aiSummary" class="ai-summary">
+                        <div class="ai-loading">Analyzing news with AI...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stocks Card -->
+            <div id="stocksCard" class="card stocks-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-line"></i> Stock Market</h2>
+                </div>
+                <div class="card-content">
+                    <div class="stock-layout">
+                        <div class="stock-info-section">
+                            <div id="stockContainer"></div>
+                        </div>
+                        <div class="stock-chart-section">
+                            <div class="chart-container">
+                                <canvas id="stockChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-    
 
-    <div id="traffic">
-        <h1 id="trafficTime"></h1>
-        <h1 id="trafficDistance"></h1>
-        <div id="map" style="height: 75vw; width: 75vw;"></div>
-
-        </div>
-    </div>
-
-    <div id="news">
-        <h2>Latest News</h2>
-        <div id="newsContainer"></div>
-        <div id="aiSummary"></div>
-    </div>
-
-    <div id="stocks">
-        <h2>Stock Market</h2>
-        <div id="stockContainer"></div>
-        <canvas id="stockChart" style="width:100%;max-width:700px"></canvas>
-    </div>
-
-    <style>
-        #aiSummary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 15px;
-            line-height: 1.6;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        #aiSummary h2 {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
-        #aiSummary p {
-            margin-bottom: 10px;
-        }
-    </style>
-
-    <div id="quoteOfTheDay">
-
-    </div>
-
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="js/weather.js"></script>
     <script src="js/traffic.js"></script>
     <script src="js/news.js"></script>
     <script src="js/mindfulness.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="js/stocks.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </body>
 </html>

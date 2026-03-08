@@ -3,20 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>Settings - Morning Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Samsung+One:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <button onclick="window.location.href='index.html'">Back</button>
-    <h1>Settings</h1>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <button class="back-btn" onclick="window.location.href='index.html'">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="app-title">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </h1>
+            </div>
+        </header>
 
-    <!-- <input type="text" id="GoToWhereLat" placeholder="Where is your commute Latitude?">
-    <input type="text" id="GoToWhereLong" placeholder="Where is your commute Longitude?">
-    <input type="text" id="homeLat" placeholder="What is your home Latitude?">
-    <input type="text" id="homeLong" placeholder="What is your home Longitude?"> -->
-    <input type="text" id="commuteStart" placeholder="Where does your commute start?">
-    <input type="text" id="commuteEnd" placeholder="Where does your commute end?">
-    <input type="text" id="stockSymbol" placeholder="Stock Symbol">
-    
+        <main class="main-content settings-content">
+            <div class="card settings-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-route"></i> Commute Settings</h2>
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="commuteStart">
+                            <i class="fas fa-home"></i>
+                            Start Location
+                        </label>
+                        <input type="text" id="commuteStart" placeholder="Start Address">
+                    </div>
+                    <div class="input-group">
+                        <label for="commuteEnd">
+                            <i class="fas fa-building"></i>
+                            End Location
+                        </label>
+                        <input type="text" id="commuteEnd" placeholder="End Address">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card settings-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-line"></i> Stock Settings</h2>
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="stockSymbol">
+                            <i class="fas fa-dollar-sign"></i>
+                            Stock Symbol
+                        </label>
+                        <input type="text" id="stockSymbol" placeholder="e.g., AAPL, GOOGL, TSLA">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
     <script src="js/settings.js"></script>
 </body>
 </html>
