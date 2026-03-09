@@ -1,5 +1,14 @@
 async function initialize() {
     try {
+        const aiSummaryElement = document.getElementById('aiSummary');
+        aiSummaryElement.innerHTML = `
+            <h2>AI Summary</h2>
+            <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
+                <div class="spinner"></div>
+                <span>Curating latest news...</span>
+            </div>
+        `;
+
         const newsData = await loadNews();
         const prompt = `Summarize the following news articles\n\n${JSON.stringify(newsData, null, 2)}`;
         // console.log('Prompt for AI:', prompt);
@@ -9,6 +18,7 @@ async function initialize() {
         await displayNews(aiResponse);
     } catch (error) {
         console.error('Failed to initialize news:', error);
+        document.getElementById('aiSummary').innerHTML = '<h2>AI Summary</h2><p>Failed to generate summary.</p>';
     }
 }
 

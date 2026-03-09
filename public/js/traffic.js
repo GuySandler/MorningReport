@@ -1,21 +1,25 @@
 let trafficData;
 
 async function getTraffic() {
-    const startLat = localStorage.getItem("homeLat");
-    const startLon = localStorage.getItem("homeLong");
-    const endLat = localStorage.getItem("GoToWhereLat");
-    const endLon = localStorage.getItem("GoToWhereLong");
+    const startAddress = localStorage.getItem("commuteStart");
+    const endAddress = localStorage.getItem("commuteEnd");
     
-    if (!startLat || !startLon || !endLat || !endLon) {
-        console.error("Start or end coordinates are missing. Please set them in the settings.");
-        document.getElementById("trafficTime").innerHTML = "Please configure traffic settings";
+    if (!startAddress || !endAddress) {
+        console.error("Start or end address are missing. Please set them in the settings.");
+        document.getElementById("traffic").style.display = "none";
+        
+        // Expand the weather card to fill the row
+        const weatherCard = document.getElementById("weather");
+        if (weatherCard) {
+            weatherCard.classList.add("span-full");
+        }
         return;
     }
     
     try {
-        const loc1response = await fetch(`http://localhost:3000/api/location?address=${localStorage.getItem("commuteStart")}`);
+        const loc1response = await fetch(`http://localhost:3000/api/location?address=${startAddress}`);
         const loc1 = await loc1response.json();
-        const loc2response = await fetch(`http://localhost:3000/api/location?address=${localStorage.getItem("commuteEnd")}`);
+        const loc2response = await fetch(`http://localhost:3000/api/location?address=${endAddress}`);
         const loc2 = await loc2response.json();
         const response = await fetch(`http://localhost:3000/api/traffic?startLat=${loc1.lat}&startLon=${loc1.lng}&endLat=${loc2.lat}&endLon=${loc2.lng}`);
         const result = await response.json();

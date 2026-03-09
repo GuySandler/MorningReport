@@ -35,6 +35,12 @@ async function init() {
     } catch (error) {
         console.error("Error fetching stock data:", error);
         document.getElementById("stocks").style.display = "none";
+        
+        // Expand the news card to fill the row
+        const newsCard = document.getElementById("news");
+        if (newsCard) {
+            newsCard.classList.add("span-full");
+        }
     }
 }
 
