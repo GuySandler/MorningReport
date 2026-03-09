@@ -9,4 +9,5 @@ async function getQuote() {
         document.getElementById("quoteOfTheDay").innerHTML = "<h2>Quote of the Day</h2><p>Error loading quote</p>";
     }
 }
+
 document.addEventListener('DOMContentLoaded', getQuote);

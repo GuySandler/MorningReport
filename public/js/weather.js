@@ -14,7 +14,6 @@ async function init() {
         precipitation: await getDaysData("precipitation"),
         humidity: await getDaysData("relative_humidity_2m"),
         cloudCover: await getDaysData("cloud_cover"),
-        // visibility: await getDaysData("visibility"),
         windSpeed: await getDaysData("wind_speed_10m")
     };
 
@@ -25,7 +24,6 @@ async function init() {
     displayWeather("precipitation", "Precipitation", "in", weather.precipitation);
     displayWeather("humidity", "Humidity", "%", weather.humidity);
     displayWeather("cloud_cover", "Cloud Cover", "%", weather.cloudCover);
-    // displayWeather("visibility", "Visibility", "mi", weather.visibility);
     displayWeather("wind_speed", "Wind Speed", "mph", weather.windSpeed);
     // serialize the weather object before sending to AI
     const aiSummary = await askAI(JSON.stringify(weather), "You are a helpful assistant that summarizes weather data into a concise, 1 sentence summary.");
@@ -88,10 +86,25 @@ async function displayWeather(id, name, unit, data) {
     const element = document.getElementById(id);
     if (!element || !data || data.length === 0) return;
     
-    element.innerHTML = `${name}: ${data[0]}${unit}`;
-    // const response = await askAI(data, "You are a helpful assistant that summarizes weather data into a concise, 1 sentence summary.");
-    // element.push(response);
-    // console.log(response);
+    const weatherIcons = {
+        'temperature': 'device_thermostat',
+        'apparent_temp': 'thermostat',
+        'precipitation': 'rainy',
+        'humidity': 'humidity_percentage',
+        'cloud_cover': 'cloud',
+        'visibility': 'visibility',
+        'wind_speed': 'air'
+    };
+    
+    const icon = weatherIcons[id] || 'info';
+    
+    element.innerHTML = `
+        <span class="material-symbols-outlined weather-icon">${icon}</span>
+        <div class="stat-details">
+            <span class="stat-value">${data[0]}<small>${unit}</small></span>
+            <span class="stat-name">${name}</span>
+        </div>
+    `;
 }
 
 async function askAI(prompt, role, priority = 1) {

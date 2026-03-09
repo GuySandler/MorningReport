@@ -132,12 +132,14 @@ function displayChart(stockData) {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {display: false},
                 scales: {
                     yAxes: [{
                         ticks: {
                             min: minValue - padding,
                             max: maxValue + padding,
+                            maxTicksLimit: 5,
                             callback: function(value) {
                                 return '$' + value.toFixed(2);
                             }
@@ -190,13 +192,14 @@ function displayChart(stockData) {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {display: false},
                 scales: {
                     yAxes: [{
                         ticks: {
                             min: minValue - padding,
                             max: maxValue + padding,
-                            maxTicksLimit: 6, // Limit number of ticks to prevent overlap
+                            maxTicksLimit: 5, // Limit number of ticks to prevent overlap
                             callback: function(value) {
                                 return '$' + value.toFixed(2);
                             }
@@ -208,7 +211,9 @@ function displayChart(stockData) {
                     }],
                     xAxes: [{
                         ticks: {
-                            maxTicksLimit: 15, // Limit x-axis labels
+                            maxTicksLimit: 6, // Greatly limit x-axis labels to avoid overlap on mobile
+                            maxRotation: 45,
+                            minRotation: 45,
                             callback: function(value, index, values) {
                                 // Show every other day
                                 return index % 2 === 0 ? value : '';
