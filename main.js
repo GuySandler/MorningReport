@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 const OpenAI = require('openai');
 
 const app = express();
-const port = 3000;
+const port = 3002;
 
 app.use(express.static('public'));
 
